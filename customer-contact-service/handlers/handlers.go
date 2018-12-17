@@ -3,6 +3,7 @@ package handlers
 import (
 	"context"
 	"encoding/csv"
+	"fmt"
 	"log"
 	"strconv"
 	"strings"
@@ -19,13 +20,13 @@ func (s *Server) AddOrUpdateCustomerContact(ctx context.Context, in *pb.Customer
 	record, err := csvReader.Read()
 	if err != nil {
 		log.Print(err.Error())
-		return nil, err
+		return &pb.CustomerContactReply{}, nil
 	}
 
 	id, err := strconv.Atoi(record[0])
 	if err != nil {
 		log.Print(err.Error())
-		return nil, err
+		return &pb.CustomerContactReply{}, nil
 	}
 
 	dao.AddOrUpdateCustomerContact(&model.CustomerContact{
@@ -34,6 +35,8 @@ func (s *Server) AddOrUpdateCustomerContact(ctx context.Context, in *pb.Customer
 		Email:  record[2],
 		Number: record[3],
 	})
+
+	fmt.Println(record)
 
 	return &pb.CustomerContactReply{}, nil
 }
