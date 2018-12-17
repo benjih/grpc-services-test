@@ -8,6 +8,10 @@ service CustomerContactService {
 
 message CustomerContactRequest {
   string data = 1;
+  string id = 2;
+  string name = 3;
+  string email_address = 4;
+  string telephone_number= 5;
 }
 
 message CustomerContactReply {
