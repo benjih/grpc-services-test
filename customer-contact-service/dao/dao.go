@@ -6,11 +6,11 @@ import (
 )
 
 type DAO interface {
-	AddOrUpdateCustomerContact(customerContact model.CustomerContact) error
+	AddOrUpdateCustomerContact(customerContact *model.CustomerContact) error
 }
 
 var GlobalDAO = mem.NewInMemoryDAO()
 
-func AddOrUpdateCustomerContact(customerContact model.CustomerContact) error {
+func AddOrUpdateCustomerContact(customerContact *model.CustomerContact) error {
 	return GlobalDAO.AddOrUpdateCustomerContact(customerContact)
 }
