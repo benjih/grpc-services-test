@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package grpc;
+
+service CustomerContactService {
+  rpc AddOrUpdateCustomerContact (CustomerContactRequest) returns (CustomerContactReply) {}
+}
+
+message CustomerContactRequest {
+  string data = 1;
+}
+
+message CustomerContactReply {
+}
