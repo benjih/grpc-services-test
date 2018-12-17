@@ -23,9 +23,9 @@ func AddOrUpdateCustomerContact(record []string) error {
 	}
 
 	return dao.AddOrUpdateCustomerContact(&model.CustomerContact{
-		ID:     id,
-		Name:   record[1],
-		Email:  record[2],
-		Number: record[3],
+		ID:              id,
+		Name:            record[1],
+		EmailAddress:    record[2],
+		TelephoneNumber: record[3],
 	})
 }
