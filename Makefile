@@ -3,3 +3,6 @@ run-customer-contact-service:
 
 run-upload-service:
 	go run upload-service/main.go
+
+pb:
+	protoc -I grpc grpc/grpc.proto --go_out=plugins=grpc:grpc
