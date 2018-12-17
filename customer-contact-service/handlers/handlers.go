@@ -3,13 +3,10 @@ package handlers
 import (
 	"context"
 	"encoding/csv"
-	"fmt"
 	"log"
-	"strconv"
 	"strings"
 
-	"github.com/benjih/grpc-services-test/customer-contact-service/dao"
-	"github.com/benjih/grpc-services-test/customer-contact-service/model"
+	"github.com/benjih/grpc-services-test/customer-contact-service/controllers"
 	pb "github.com/benjih/grpc-services-test/grpc"
 )
 
@@ -23,20 +20,12 @@ func (s *Server) AddOrUpdateCustomerContact(ctx context.Context, in *pb.Customer
 		return &pb.CustomerContactReply{}, nil
 	}
 
-	id, err := strconv.Atoi(record[0])
-	if err != nil {
+	if err := controllers.AddOrUpdateCustomerContact(record); err != nil {
 		log.Print(err.Error())
 		return &pb.CustomerContactReply{}, nil
 	}
 
-	dao.AddOrUpdateCustomerContact(&model.CustomerContact{
-		ID:     id,
-		Name:   record[1],
-		Email:  record[2],
-		Number: record[3],
-	})
-
-	fmt.Println(record)
+	log.Print("Customer contact added")
 
 	return &pb.CustomerContactReply{}, nil
 }
